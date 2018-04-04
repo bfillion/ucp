@@ -1,0 +1,958 @@
+################################
+# Namespace fma-prototype
+################################
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fma-prototype
+---
+###########################################################################
+# Secrets
+##########################################################################
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fma-prototype-unit-devart-data-oracle
+  namespace: fma-prototype
+type: Opaque
+data:
+  Devart.Data.Oracle.key: cmytS4NtrUv4GAOHYz2TROK66S3f/JX+f6jpKvLSKOb34bnM4XLIV4jYLkVYpeXjxVsQzqs0mJBUDrneOL2au+iwYFRwirqyPa+Ztz2n3A2ZqMuHkjz1a7/5eR7otAFPFfWcrE5HDYrs+vbRNYMbGkSWjkj3wJsSCCKSOTWqfrlG5YSeaAf6VGzrTpujPVAsY4FW3mFCe/2k1JWRvLA53wNGhVfE9WK85/SL0pjRj6zcd/vigN95yPz4AbWabMGq2TkbQEE/y9xcg65mkx2RGHTfPUmRhgNpkG6pY+vt6Bkn2vwaijpimOMhu4+CMAK1UCw32ch7/If4iRqqxNfcTmya8zHjQYT4
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fma-prototype-unit-carte-connexion-oracle-json
+  namespace: fma-prototype
+type: Opaque
+data:
+  fma-prototype-unit-carte-connexion-oracle.json: ew0KICAiVXNlciBJZCI6ICJzeXN0ZW0iLA0KICAiUGFzc3dvcmQiOiAib3JhY2xlIiwNCiAgIlNlcnZlciI6ICJmbWEtcHJvdG90eXBlLXVuaXQtYmQiLA0KICAiUG9ydCI6ICIxNTIxIiwNCiAgIkxpY2Vuc2UgS2V5IjogInRyaWFsOnswfS9EZXZhcnQuRGF0YS5PcmFjbGUua2V5Ig0KfQ==
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fma-prototype-unit-config-servridt-json
+  namespace: fma-prototype
+type: Opaque
+data:
+  fma-prototype-unit.config.servridt.json: ew0KICAvLyBJZGVudGl077+9DQogICJJZGVudGl0eVJlc291cmNlcyI6IFsNCiAgICB7DQogICAgICAiRGlzcGxheU5hbWUiOiAiUkFNUSIsDQogICAgICAiTmFtZSI6ICJSQU1RIiwNCiAgICAgICJVc2VyQ2xhaW1zIjogWyAiZ3JvdXBzIiBdDQogICAgfQ0KICBdLA0KDQogIC8vIEFwaQ0KICAiQXBpUmVzb3VyY2VzIjogWw0KICAgIHsNCiAgICAgICJOYW1lIjogIlJBTVEuRk1BLkNvb3JkLlByb3RvdHlwZSIsDQogICAgICAiRGlzcGxheU5hbWUiOiAiUkFNUS5GTUEuQ29vcmQuUHJvdG90eXBlIiwNCiAgICAgICJDbGFpbVR5cGVzIjogWyAiZ3JvdXBzIiBdDQogICAgfQ0KICBdLA0KDQogIC8vIEFwcGxpY2F0aW9uIGNsaWVudGVzDQogICJDbGllbnRzIjogWw0KICAgIC8vIENsaWVudCBNVkMgZGUgbGEgc29sdXRpb24gUkFNUS5GTUEuUHJvdG90eXBlDQogICAgew0KICAgICAgIkNsaWVudElkIjogIlJBTVEuRk1BLklVLldFQi5Qcm90b3R5cGUiLA0KICAgICAgIkNsaWVudE5hbWUiOiAiUkFNUS5GTUEuSVUuV0VCLlByb3RvdHlwZSIsDQogICAgICAiQWx3YXlzSW5jbHVkZVVzZXJDbGFpbXNJbklkVG9rZW4iOiB0cnVlLCAvLyBQZXJtZXQgZCdhdm9pciBsZXMgY2xhaW1zIGRhbnMgbCdJZFRva2VuIHF1aSBlc3QgdXRpbGlz77+9IGRhbnMgbCdhcHBsaWNhdGlvbiBNVkMuDQogICAgICAiQWxsb3dlZEdyYW50VHlwZXMiOiBbICJoeWJyaWQiLCAiY2xpZW50X2NyZWRlbnRpYWxzIiBdLCAvLyBE77+9ZmluaXQgbCd1dGlsaXNhdGlvbiBkdSBmbG93IGh5YnJpZCBwb3VyIHBlcm1ldHRyZSBsJ2FjY++/vXMg77+9IGwnYXBpDQogICAgICAiUmVkaXJlY3RVcmlzIjogWyAiaHR0cDovLzEwLjIxMS41NS42NS9mbWFwcm90b3R5cGUvc2lnbmluLW9pZGMiIF0sDQogICAgICAiUG9zdExvZ291dFJlZGlyZWN0VXJpcyI6IFsgImh0dHA6Ly8xMC4yMTEuNTUuNjUvZm1hcHJvdG90eXBlL3NpZ25vdXQtY2FsbGJhY2stb2lkYyIgXSwNCiAgICAgICJDbGllbnRTZWNyZXRzIjogWyB7ICJWYWx1ZSI6ICJLN2dOVTNzZG8rT0wwd05ocW9WV2hyM2c2czF4WXY3Mm9sL3BlL1Vub2xzPSIgfSBdLCAvLyBzZWNyZXQuc2hhMjU2KCkNCiAgICAgICJBbGxvd2VkU2NvcGVzIjogWw0KICAgICAgICAib3BlbmlkIiwNCiAgICAgICAgInByb2ZpbGUiLA0KICAgICAgICAiUkFNUS5GTUEuQ29vcmQuUHJvdG90eXBlIiwNCiAgICAgICAgIlJBTVEiDQogICAgICBdLA0KICAgICAgIkFsbG93T2ZmbGluZUFjY2VzcyI6ICJ0cnVlIiwNCiAgICAgICJSZXF1aXJlQ29uc2VudCI6IGZhbHNlDQogICAgfSwNCiAgICB7DQogICAgICAiQ2xpZW50SWQiOiAiUG9zdG1hbiIsDQogICAgICAiQ2xpZW50TmFtZSI6ICJQb3N0bWFuIiwNCiAgICAgICJBbHdheXNJbmNsdWRlVXNlckNsYWltc0luSWRUb2tlbiI6IHRydWUsIC8vIFBlcm1ldCBkJ2F2b2lyIGxlcyBjbGFpbXMgZGFucyBsJ0lkVG9rZW4gcXVpIGVzdCB1dGlsaXPvv70gZGFucyBsJ2FwcGxpY2F0aW9uIE1WQy4NCiAgICAgICJBbGxvd2VkR3JhbnRUeXBlcyI6IFsgImF1dGhvcml6YXRpb25fY29kZSIgXSwgLy8gRO+/vWZpbml0IGwndXRpbGlzYXRpb24gZHUgZmxvdyBoeWJyaWQgcG91ciBwZXJtZXR0cmUgbCdhY2Pvv71zIO+/vSBsJ2FwaQ0KICAgICAgIlJlZGlyZWN0VXJpcyI6IFsgImh0dHBzOi8vd3d3LmdldHBvc3RtYW4uY29tL29hdXRoMi9jYWxsYmFjayIgXSwNCiAgICAgICJDbGllbnRTZWNyZXRzIjogWyB7ICJWYWx1ZSI6ICJLN2dOVTNzZG8rT0wwd05ocW9WV2hyM2c2czF4WXY3Mm9sL3BlL1Vub2xzPSIgfSBdLCAvLyBzZWNyZXQuc2hhMjU2KCkNCiAgICAgICJBbGxvd2VkU2NvcGVzIjogWw0KICAgICAgICAib3BlbmlkIiwNCiAgICAgICAgInByb2ZpbGUiLA0KICAgICAgICAiUkFNUS5GTUEuQ29vcmQuUHJvdG90eXBlIiwNCiAgICAgICAgIlJBTVEiDQogICAgICBdLA0KICAgICAgIkFsbG93T2ZmbGluZUFjY2VzcyI6ICJ0cnVlIg0KICAgIH0sDQogICAgew0KICAgICAgIkNsaWVudElkIjogIlN3YWdnZXIiLA0KICAgICAgIkNsaWVudE5hbWUiOiAiU3dhZ2dlciBVSSIsDQogICAgICAiQWxsb3dlZEdyYW50VHlwZXMiOiBbICJpbXBsaWNpdCIgXSwNCiAgICAgICJSZWRpcmVjdFVyaXMiOiBbICJodHRwOi8vMTAuMjExLjU1LjY1L3N3YWdnZXIvbzJjLmh0bWwiIF0sDQogICAgICAiQ2xpZW50U2VjcmV0cyI6IFsgeyAiVmFsdWUiOiAiSzdnTlUzc2RvK09MMHdOaHFvVldocjNnNnMxeFl2NzJvbC9wZS9Vbm9scz0iIH0gXSwgLy8gc2VjcmV0LnNoYTI1NigpDQogICAgICAiQWxsb3dlZFNjb3BlcyI6IFsNCiAgICAgICAgIlJBTVEuRk1BLkNvb3JkLlByb3RvdHlwZSINCiAgICAgIF0sDQogICAgICAiQWxsb3dBY2Nlc3NUb2tlbnNWaWFCcm93c2VyIjogInRydWUiDQogICAgfQkJCQ0KICBdLA0KDQogIC8vIFV0aWxpc2F0ZXVycw0KICAiVXNlcnMiOiBbDQogICAgew0KICAgICAgIlN1YmplY3RJZCI6ICIxIiwNCiAgICAgICJVc2VybmFtZSI6ICJhZG1pbiIsDQogICAgICAiUGFzc3dvcmQiOiAicGFzc3dvcmQiLA0KICAgICAgIkNsYWltcyI6IFsNCiAgICAgICAgew0KICAgICAgICAgICJUeXBlIjogIm5hbWUiLA0KICAgICAgICAgICJWYWx1ZSI6ICJBZG1pbmlzdHJhdGV1ciINCiAgICAgICAgfSwNCiAgICAgICAgew0KICAgICAgICAgICJUeXBlIjogImdyb3VwcyIsDQogICAgICAgICAgIlZhbHVlIjogIkZNQV9BZG1pbiINCiAgICAgICAgfSwNCiAgICAgICAgew0KICAgICAgICAgICJUeXBlIjogImdyb3VwcyIsDQogICAgICAgICAgIlZhbHVlIjogIkZNQV9VdGlsIg0KICAgICAgICB9DQogICAgICBdDQogICAgfSwNCiAgICB7DQogICAgICAiU3ViamVjdElkIjogIjIiLA0KICAgICAgIlVzZXJuYW1lIjogInV0aWwiLA0KICAgICAgIlBhc3N3b3JkIjogInBhc3N3b3JkIiwNCiAgICAgICJDbGFpbXMiOiBbDQogICAgICAgIHsNCiAgICAgICAgICAiVHlwZSI6ICJuYW1lIiwNCiAgICAgICAgICAiVmFsdWUiOiAiVXRpbGlzYXRldXIiDQogICAgICAgIH0sDQogICAgICAgIHsNCiAgICAgICAgICAiVHlwZSI6ICJncm91cHMiLA0KICAgICAgICAgICJWYWx1ZSI6ICJGTUFfVXRpbCINCiAgICAgICAgfQ0KICAgICAgXQ0KICAgIH0NCiAgXQ0KfQ0K
+---
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJyYW1xbGljLmF6dXJlY3IuaW8iOnsidXNlcm5hbWUiOiJyYW1xbGljIiwicGFzc3dvcmQiOiJEKy8rLzErLz11MkRlK3M9K1N2aS96YTY1bmQrQlFpSCIsImVtYWlsIjoibm90QHVzZWQuY29tIiwiYXV0aCI6ImNtRnRjV3hwWXpwRUt5OHJMekVyTHoxMU1rUmxLM005SzFOMmFTOTZZVFkxYm1RclFsRnBTQT09In19fQ==
+kind: Secret
+metadata:
+  name: registre-dev
+  namespace: fma-prototype
+type: kubernetes.io/dockerconfigjson
+---
+###########################################################################
+# ConfigMap
+##########################################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fma-prototype-unit-config
+  namespace: fma-prototype
+  labels:
+    app: fma-prototype-unit
+data:
+  OIDC_FOURNISSEUR: IS4
+  OIDC_CLIENT_ID: RAMQ.FMA.IU.WEB.Prototype
+  OIDC_AUTORITE: http://10.211.55.65/fmaprototype_securite
+  OIDC_AUDIENCE: RAMQ.FMA.Coord.Prototype
+  OIDC_REQUIERT_HTTPS: "false"
+  OIDC_CLIENT_SECRET: secret
+  OIDC_SCOPES: RAMQ.FMA.Coord.Prototype;offline_access;RAMQ
+  GROUPE_ADMIN: Demo_Admin
+  GROUPE_UTILISATEUR: Demo_Util
+---
+###########################################################################
+# Service fma-prototype-unit-bd
+##########################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fma-prototype-unit-bd
+    component: fma-prototype-unit-bd
+  name: fma-prototype-unit-bd
+  namespace: fma-prototype
+spec:
+  type: ClusterIP
+  selector:
+    app: fma-prototype-unit-bd
+    component: fma-prototype-unit-bd
+  ports:
+  - name: autre
+    protocol: TCP
+    port: 22
+  - name: oracle
+    protocol: TCP
+    port: 1521
+  - name: apex
+    protocol: TCP
+    port: 8080
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: fma-prototype-unit-bd
+  namespace: fma-prototype
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fma-prototype-unit-bd
+      component: fma-prototype-unit-bd
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/status: '{"version":"15bbcd92b59e99a83360c48bd7af9e84ffd5b961b914e8febcee0e38d08b773e","initContainers":["istio-init","enable-core-dump"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"]}'
+      creationTimestamp: null
+      labels:
+        app: fma-prototype-unit-bd
+        component: fma-prototype-unit-bd
+    spec:
+      containers:
+      - image: ramqlic.azurecr.io/ramq.fma.prototype.bd.oracle.xe.11g:859
+        imagePullPolicy: IfNotPresent
+        name: fma-prototype-unit-bd
+        ports:
+        - containerPort: 1521
+        - containerPort: 8080
+        resources: {}
+      - args:
+        - proxy
+        - sidecar
+        - --configPath
+        - /etc/istio/proxy
+        - --binaryPath
+        - /usr/local/bin/envoy
+        - --serviceCluster
+        - fma-prototype-unit-bd
+        - --drainDuration
+        - 45s
+        - --parentShutdownDuration
+        - 1m0s
+        - --discoveryAddress
+        - istio-pilot.istio-system:8080
+        - --discoveryRefreshDelay
+        - 1s
+        - --zipkinAddress
+        - zipkin.istio-system:9411
+        - --connectTimeout
+        - 10s
+        - --statsdUdpAddress
+        - istio-mixer.istio-system:9125
+        - --proxyAdminPort
+        - "15000"
+        - --controlPlaneAuthPolicy
+        - NONE
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: INSTANCE_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        image: docker.io/istio/proxy_debug:0.7.1
+        imagePullPolicy: IfNotPresent
+        name: istio-proxy
+        resources: {}
+        securityContext:
+          privileged: true
+          readOnlyRootFilesystem: false
+          runAsUser: 1337
+        volumeMounts:
+        - mountPath: /etc/istio/proxy
+          name: istio-envoy
+        - mountPath: /etc/certs/
+          name: istio-certs
+          readOnly: true
+      imagePullSecrets:
+      - name: registre-dev
+      initContainers:
+      - args:
+        - -p
+        - "15001"
+        - -u
+        - "1337"
+        image: docker.io/istio/proxy_init:0.7.1
+        imagePullPolicy: IfNotPresent
+        name: istio-init
+        resources: {}
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+      - args:
+        - -c
+        - sysctl -w kernel.core_pattern=/etc/istio/proxy/core.%e.%p.%t && ulimit -c
+          unlimited
+        command:
+        - /bin/sh
+        image: alpine
+        imagePullPolicy: IfNotPresent
+        name: enable-core-dump
+        resources: {}
+        securityContext:
+          privileged: true
+      volumes:
+      - emptyDir:
+          medium: Memory
+        name: istio-envoy
+      - name: istio-certs
+        secret:
+          optional: true
+          secretName: istio.default
+status: {}
+---
+###########################################################################
+# Service fma-prototype-unit-redis
+##########################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fma-prototype-unit-redis
+    component: fma-prototype-unit-redis
+  name: fma-prototype-unit-redis
+  namespace: fma-prototype
+spec:
+  type: ClusterIP
+  selector:
+    app: fma-prototype-unit-redis
+    component: fma-prototype-unit-redis
+  ports:
+  - name: redis
+    protocol: TCP
+    port: 6379
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: fma-prototype-unit-redis
+  namespace: fma-prototype
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fma-prototype-unit-redis
+      component: fma-prototype-unit-redis
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/status: '{"version":"15bbcd92b59e99a83360c48bd7af9e84ffd5b961b914e8febcee0e38d08b773e","initContainers":["istio-init","enable-core-dump"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"]}'
+      creationTimestamp: null
+      labels:
+        app: fma-prototype-unit-redis
+        component: fma-prototype-unit-redis
+    spec:
+      containers:
+      - image: redis:latest
+        imagePullPolicy: IfNotPresent
+        name: fma-prototype-unit-redis
+        ports:
+        - containerPort: 6379
+        resources: {}
+      - args:
+        - proxy
+        - sidecar
+        - --configPath
+        - /etc/istio/proxy
+        - --binaryPath
+        - /usr/local/bin/envoy
+        - --serviceCluster
+        - fma-prototype-unit-redis
+        - --drainDuration
+        - 45s
+        - --parentShutdownDuration
+        - 1m0s
+        - --discoveryAddress
+        - istio-pilot.istio-system:8080
+        - --discoveryRefreshDelay
+        - 1s
+        - --zipkinAddress
+        - zipkin.istio-system:9411
+        - --connectTimeout
+        - 10s
+        - --statsdUdpAddress
+        - istio-mixer.istio-system:9125
+        - --proxyAdminPort
+        - "15000"
+        - --controlPlaneAuthPolicy
+        - NONE
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: INSTANCE_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        image: docker.io/istio/proxy_debug:0.7.1
+        imagePullPolicy: IfNotPresent
+        name: istio-proxy
+        resources: {}
+        securityContext:
+          privileged: true
+          readOnlyRootFilesystem: false
+          runAsUser: 1337
+        volumeMounts:
+        - mountPath: /etc/istio/proxy
+          name: istio-envoy
+        - mountPath: /etc/certs/
+          name: istio-certs
+          readOnly: true
+      initContainers:
+      - args:
+        - -p
+        - "15001"
+        - -u
+        - "1337"
+        image: docker.io/istio/proxy_init:0.7.1
+        imagePullPolicy: IfNotPresent
+        name: istio-init
+        resources: {}
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+      - args:
+        - -c
+        - sysctl -w kernel.core_pattern=/etc/istio/proxy/core.%e.%p.%t && ulimit -c
+          unlimited
+        command:
+        - /bin/sh
+        image: alpine
+        imagePullPolicy: IfNotPresent
+        name: enable-core-dump
+        resources: {}
+        securityContext:
+          privileged: true
+      volumes:
+      - emptyDir:
+          medium: Memory
+        name: istio-envoy
+      - name: istio-certs
+        secret:
+          optional: true
+          secretName: istio.default
+status: {}
+---
+###########################################################################
+# Service fma-prototype-unit-securite
+##########################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fma-prototype-unit-securite
+    component: fma-prototype-unit-securite
+  name: fma-prototype-unit-securite
+  namespace: fma-prototype
+spec:
+  type: NodePort
+  selector:
+    app: fma-prototype-unit-securite
+    component: fma-prototype-unit-securite
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+    #nodePort: 30794
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: fma-prototype-unit-securite
+  namespace: fma-prototype
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fma-prototype-unit-securite
+      component: fma-prototype-unit-securite
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/status: '{"version":"15bbcd92b59e99a83360c48bd7af9e84ffd5b961b914e8febcee0e38d08b773e","initContainers":["istio-init","enable-core-dump"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"]}'
+      creationTimestamp: null
+      labels:
+        app: fma-prototype-unit-securite
+        component: fma-prototype-unit-securite
+    spec:
+      containers:
+      - env:
+        - name: RPERT_SECRET
+          value: /app/secrets
+        - name: CONFIG_SERVR_IDT
+          value: fma_prototype_unit.Config.ServrIdt.json
+        - name: PATH_BASE
+          value: /fmaprototype_securite
+        image: ramqlic.azurecr.io/ramq.com.serveuridentite:latest
+        imagePullPolicy: IfNotPresent
+        name: fma-prototype-unit-securite
+        ports:
+        - containerPort: 8080
+        resources: {}
+        volumeMounts:
+        - mountPath: /app/secrets
+          name: secrets
+          readOnly: true
+      - args:
+        - proxy
+        - sidecar
+        - --configPath
+        - /etc/istio/proxy
+        - --binaryPath
+        - /usr/local/bin/envoy
+        - --serviceCluster
+        - fma-prototype-unit-securite
+        - --drainDuration
+        - 45s
+        - --parentShutdownDuration
+        - 1m0s
+        - --discoveryAddress
+        - istio-pilot.istio-system:8080
+        - --discoveryRefreshDelay
+        - 1s
+        - --zipkinAddress
+        - zipkin.istio-system:9411
+        - --connectTimeout
+        - 10s
+        - --statsdUdpAddress
+        - istio-mixer.istio-system:9125
+        - --proxyAdminPort
+        - "15000"
+        - --controlPlaneAuthPolicy
+        - NONE
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: INSTANCE_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        image: docker.io/istio/proxy_debug:0.7.1
+        imagePullPolicy: IfNotPresent
+        name: istio-proxy
+        resources: {}
+        securityContext:
+          privileged: true
+          readOnlyRootFilesystem: false
+          runAsUser: 1337
+        volumeMounts:
+        - mountPath: /etc/istio/proxy
+          name: istio-envoy
+        - mountPath: /etc/certs/
+          name: istio-certs
+          readOnly: true
+      imagePullSecrets:
+      - name: registre-dev
+      initContainers:
+      - args:
+        - -p
+        - "15001"
+        - -u
+        - "1337"
+        image: docker.io/istio/proxy_init:0.7.1
+        imagePullPolicy: IfNotPresent
+        name: istio-init
+        resources: {}
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+      - args:
+        - -c
+        - sysctl -w kernel.core_pattern=/etc/istio/proxy/core.%e.%p.%t && ulimit -c
+          unlimited
+        command:
+        - /bin/sh
+        image: alpine
+        imagePullPolicy: IfNotPresent
+        name: enable-core-dump
+        resources: {}
+        securityContext:
+          privileged: true
+      volumes:
+      - name: secrets
+        secret:
+          secretName: fma-prototype-unit-config-servridt-json
+      - emptyDir:
+          medium: Memory
+        name: istio-envoy
+      - name: istio-certs
+        secret:
+          optional: true
+          secretName: istio.default
+status: {}
+---
+###########################################################################
+# Service fma-prototype-unit-web
+##########################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fma-prototype-unit-web
+    component: fma-prototype-unit-web
+  name: fma-prototype-unit-web
+  namespace: fma-prototype
+spec:
+  type: NodePort
+  selector:
+    app: fma-prototype-unit-web
+    component: fma-prototype-unit-web
+  ports:
+  - name: http
+    protocol: TCP
+    #nodePort: 30790
+    port: 8080
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: fma-prototype-unit-web
+  namespace: fma-prototype
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fma-prototype-unit-web
+      component: fma-prototype-unit-web
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/status: '{"version":"15bbcd92b59e99a83360c48bd7af9e84ffd5b961b914e8febcee0e38d08b773e","initContainers":["istio-init","enable-core-dump"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"]}'
+      creationTimestamp: null
+      labels:
+        app: fma-prototype-unit-web
+        component: fma-prototype-unit-web
+    spec:
+      containers:
+      - env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: unitaire
+        - name: SERVEURLA
+          value: http://fma-prototype-unit-api
+        - name: REDIS_URL
+          value: fma-prototype-unit-redis:6379
+        - name: PATH_BASE
+          value: /fmaprototype
+        - name: OIDC_FOURNISSEUR
+          valueFrom:
+            configMapKeyRef:
+              key: OIDC_FOURNISSEUR
+              name: fma-prototype-unit-config
+        - name: OIDC_CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              key: OIDC_CLIENT_ID
+              name: fma-prototype-unit-config
+        - name: OIDC_AUTORITE
+          valueFrom:
+            configMapKeyRef:
+              key: OIDC_AUTORITE
+              name: fma-prototype-unit-config
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+            configMapKeyRef:
+              key: OIDC_CLIENT_SECRET
+              name: fma-prototype-unit-config
+        - name: OIDC_SCOPES
+          valueFrom:
+            configMapKeyRef:
+              key: OIDC_SCOPES
+              name: fma-prototype-unit-config
+        - name: GROUPE_ADMIN
+          valueFrom:
+            configMapKeyRef:
+              key: GROUPE_ADMIN
+              name: fma-prototype-unit-config
+        - name: GROUPE_UTILISATEUR
+          valueFrom:
+            configMapKeyRef:
+              key: GROUPE_UTILISATEUR
+              name: fma-prototype-unit-config
+        image: ramqlic.azurecr.io/ramq.fma.iu.web.prototype:latest
+        imagePullPolicy: IfNotPresent
+        name: fma-prototype-unit-web
+        ports:
+        - containerPort: 8080
+        resources: {}
+        volumeMounts:
+        - mountPath: /app/log
+          name: log
+      - args:
+        - proxy
+        - sidecar
+        - --configPath
+        - /etc/istio/proxy
+        - --binaryPath
+        - /usr/local/bin/envoy
+        - --serviceCluster
+        - fma-prototype-unit-web
+        - --drainDuration
+        - 45s
+        - --parentShutdownDuration
+        - 1m0s
+        - --discoveryAddress
+        - istio-pilot.istio-system:8080
+        - --discoveryRefreshDelay
+        - 1s
+        - --zipkinAddress
+        - zipkin.istio-system:9411
+        - --connectTimeout
+        - 10s
+        - --statsdUdpAddress
+        - istio-mixer.istio-system:9125
+        - --proxyAdminPort
+        - "15000"
+        - --controlPlaneAuthPolicy
+        - NONE
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: INSTANCE_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        image: docker.io/istio/proxy_debug:0.7.1
+        imagePullPolicy: IfNotPresent
+        name: istio-proxy
+        resources: {}
+        securityContext:
+          privileged: true
+          readOnlyRootFilesystem: false
+          runAsUser: 1337
+        volumeMounts:
+        - mountPath: /etc/istio/proxy
+          name: istio-envoy
+        - mountPath: /etc/certs/
+          name: istio-certs
+          readOnly: true
+      imagePullSecrets:
+      - name: registre-dev
+      initContainers:
+      - args:
+        - -p
+        - "15001"
+        - -u
+        - "1337"
+        image: docker.io/istio/proxy_init:0.7.1
+        imagePullPolicy: IfNotPresent
+        name: istio-init
+        resources: {}
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+      - args:
+        - -c
+        - sysctl -w kernel.core_pattern=/etc/istio/proxy/core.%e.%p.%t && ulimit -c
+          unlimited
+        command:
+        - /bin/sh
+        image: alpine
+        imagePullPolicy: IfNotPresent
+        name: enable-core-dump
+        resources: {}
+        securityContext:
+          privileged: true
+      volumes:
+      - hostPath:
+          path: /var/prototype
+          type: DirectoryOrCreate
+        name: log
+      - emptyDir:
+          medium: Memory
+        name: istio-envoy
+      - name: istio-certs
+        secret:
+          optional: true
+          secretName: istio.default
+status: {}
+---
+###########################################################################
+# Service fma-prototype-unit-api
+##########################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fma-prototype-unit-api
+    component: fma-prototype-unit-api
+  name: fma-prototype-unit-api
+  namespace: fma-prototype
+spec:
+  type: ClusterIP
+  selector:
+    app: fma-prototype-unit-api
+    component: fma-prototype-unit-api
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: fma-prototype-unit-api
+  namespace: fma-prototype
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fma-prototype-unit-api
+      component: fma-prototype-unit-api
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/status: '{"version":"15bbcd92b59e99a83360c48bd7af9e84ffd5b961b914e8febcee0e38d08b773e","initContainers":["istio-init","enable-core-dump"],"containers":["istio-proxy"],"volumes":["istio-envoy","istio-certs"]}'
+      creationTimestamp: null
+      labels:
+        app: fma-prototype-unit-api
+        component: fma-prototype-unit-api
+    spec:
+      containers:
+      - env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: unitaire
+        - name: RPERT_SECRET
+          value: /app/secrets/..data
+        - name: INFO_CONNEXION
+          value: fma-prototype-unit-carte-connexion-oracle.json
+        - name: CHAINE_CONNEXION
+          value: Direct=True;Service Name=XE;Connection Timeout=30;
+        - name: HEALTH_CHECK_BD
+          value: http://fma-prototype-unit-bd:8080/apex
+        - name: OIDC_AUDIENCE
+          valueFrom:
+            configMapKeyRef:
+              key: OIDC_AUDIENCE
+              name: fma-prototype-unit-config
+        - name: OIDC_AUTORITE
+          valueFrom:
+            configMapKeyRef:
+              key: OIDC_AUTORITE
+              name: fma-prototype-unit-config
+        - name: OIDC_REQUIERT_HTTPS
+          valueFrom:
+            configMapKeyRef:
+              key: OIDC_REQUIERT_HTTPS
+              name: fma-prototype-unit-config
+        - name: GROUPE_ADMIN
+          valueFrom:
+            configMapKeyRef:
+              key: GROUPE_ADMIN
+              name: fma-prototype-unit-config
+        - name: GROUPE_UTILISATEUR
+          valueFrom:
+            configMapKeyRef:
+              key: GROUPE_UTILISATEUR
+              name: fma-prototype-unit-config
+        image: ramqlic.azurecr.io/ramq.fma.coord.prototype:latest
+        imagePullPolicy: IfNotPresent
+        name: fma-prototype-unit-api
+        ports:
+        - containerPort: 8080
+        resources: {}
+        volumeMounts:
+        - mountPath: /app/secrets
+          name: secrets
+          readOnly: true
+        - mountPath: /app/log
+          name: log
+      - args:
+        - proxy
+        - sidecar
+        - --configPath
+        - /etc/istio/proxy
+        - --binaryPath
+        - /usr/local/bin/envoy
+        - --serviceCluster
+        - fma-prototype-unit-api
+        - --drainDuration
+        - 45s
+        - --parentShutdownDuration
+        - 1m0s
+        - --discoveryAddress
+        - istio-pilot.istio-system:8080
+        - --discoveryRefreshDelay
+        - 1s
+        - --zipkinAddress
+        - zipkin.istio-system:9411
+        - --connectTimeout
+        - 10s
+        - --statsdUdpAddress
+        - istio-mixer.istio-system:9125
+        - --proxyAdminPort
+        - "15000"
+        - --controlPlaneAuthPolicy
+        - NONE
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: INSTANCE_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        image: docker.io/istio/proxy_debug:0.7.1
+        imagePullPolicy: IfNotPresent
+        name: istio-proxy
+        resources: {}
+        securityContext:
+          privileged: true
+          readOnlyRootFilesystem: false
+          runAsUser: 1337
+        volumeMounts:
+        - mountPath: /etc/istio/proxy
+          name: istio-envoy
+        - mountPath: /etc/certs/
+          name: istio-certs
+          readOnly: true
+      imagePullSecrets:
+      - name: registre-dev
+      initContainers:
+      - args:
+        - -p
+        - "15001"
+        - -u
+        - "1337"
+        image: docker.io/istio/proxy_init:0.7.1
+        imagePullPolicy: IfNotPresent
+        name: istio-init
+        resources: {}
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+          privileged: true
+      - args:
+        - -c
+        - sysctl -w kernel.core_pattern=/etc/istio/proxy/core.%e.%p.%t && ulimit -c
+          unlimited
+        command:
+        - /bin/sh
+        image: alpine
+        imagePullPolicy: IfNotPresent
+        name: enable-core-dump
+        resources: {}
+        securityContext:
+          privileged: true
+      volumes:
+      - name: secrets
+        projected:
+          sources:
+          - secret:
+              name: fma-prototype-unit-devart-data-oracle
+          - secret:
+              name: fma-prototype-unit-carte-connexion-oracle-json
+      - hostPath:
+          path: /var/prototype
+          type: DirectoryOrCreate
+        name: log
+      - emptyDir:
+          medium: Memory
+        name: istio-envoy
+      - name: istio-certs
+        secret:
+          optional: true
+          secretName: istio.default
+status: {}
+---
+###########################################################################
+# Ingress
+##########################################################################
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: fma-prototype-ingress
+  namespace: fma-prototype
+  annotations:
+    kubernetes.io/ingress.class: "istio"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /fmaprototype
+        backend:
+          serviceName: fma-prototype-unit-web
+          servicePort: 8080
+      - path: /fmaprototype/.*
+        backend:
+          serviceName: fma-prototype-unit-web
+          servicePort: 8080
+      - path: /fmaprototype_securite
+        backend:
+          serviceName: fma-prototype-unit-securite
+          servicePort: 8080
+      - path: /fmaprototype_securite/.*
+        backend:
+          serviceName: fma-prototype-unit-securite
+          servicePort: 8080
+      - path: /swagger
+        backend:
+          serviceName: fma-prototype-unit-api
+          servicePort: 8080
+      - path: /swagger/.*
+        backend:
+          serviceName: fma-prototype-unit-api
+          servicePort: 8080
+---
+apiVersion: config.istio.io/v1alpha2
+kind: EgressRule
+metadata:
+  name: extiaks-egress-rule
+spec:
+  destination:
+    service: 10.211.55.65
+  ports:
+    - port: 80
+      protocol: http
+---
