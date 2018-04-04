@@ -1,0 +1,11 @@
+DOCKER_EE_URL="https://storebits.docker.com/ee/ubuntu/sub-1944db73-23dd-44a7-add0-c7ee73c6ce6c/ubuntu"
+
+add-apt-repository "deb [arch=amd64] https://storebits.docker.com/ee/ubuntu/sub-1944db73-23dd-44a7-add0-c7ee73c6ce6c/ubuntu \
+$(lsb_release -cs) \ test-2.0"
+
+curl -fsSL https://storebits.docker.com/ee/ubuntu/sub-1944db73-23dd-44a7-add0-c7ee73c6ce6c/ubuntu/gpg | sudo apt-key add -
+
+docker run -it --rm \
+  docker/dtr:2.5.0-beta3 install \
+  --ucp-node <ucp-node-name> \
+  --ucp-insecure-tls
