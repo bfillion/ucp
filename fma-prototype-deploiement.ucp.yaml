@@ -276,7 +276,7 @@ spec:
         - name: ASPNETCORE_ENVIRONMENT
           value: unitaire
         - name: SERVEURLA
-          value: http://fma-prototype-unit-api
+          value: http://fma-prototype-unit-api:8080
         - name: REDIS_URL
           value: fma-prototype-unit-redis:6379
         - name: PATH_BASE
