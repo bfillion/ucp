@@ -1,0 +1,105 @@
+{
+  // Identit�
+  "IdentityResources": [
+    {
+      "DisplayName": "RAMQ",
+      "Name": "RAMQ",
+      "UserClaims": [ "groups" ]
+    }
+  ],
+
+  // Api
+  "ApiResources": [
+    {
+      "Name": "RAMQ.FMA.Coord.Prototype",
+      "DisplayName": "RAMQ.FMA.Coord.Prototype",
+      "ClaimTypes": [ "groups" ]
+    }
+  ],
+
+  // Application clientes
+  "Clients": [
+    // Client MVC de la solution RAMQ.FMA.Prototype
+    {
+      "ClientId": "RAMQ.FMA.IU.WEB.Prototype",
+      "ClientName": "RAMQ.FMA.IU.WEB.Prototype",
+      "AlwaysIncludeUserClaimsInIdToken": true, // Permet d'avoir les claims dans l'IdToken qui est utilis� dans l'application MVC.
+      "AllowedGrantTypes": [ "hybrid", "client_credentials" ], // D�finit l'utilisation du flow hybrid pour permettre l'acc�s � l'api
+      "RedirectUris": [ "http://10.211.55.65/fmaprototype/signin-oidc" ],
+      "PostLogoutRedirectUris": [ "http://10.211.55.65/fmaprototype/signout-callback-oidc" ],
+      "ClientSecrets": [ { "Value": "K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols=" } ], // secret.sha256()
+      "AllowedScopes": [
+        "openid",
+        "profile",
+        "RAMQ.FMA.Coord.Prototype",
+        "RAMQ"
+      ],
+      "AllowOfflineAccess": "true",
+      "RequireConsent": false
+    },
+    {
+      "ClientId": "Postman",
+      "ClientName": "Postman",
+      "AlwaysIncludeUserClaimsInIdToken": true, // Permet d'avoir les claims dans l'IdToken qui est utilis� dans l'application MVC.
+      "AllowedGrantTypes": [ "authorization_code" ], // D�finit l'utilisation du flow hybrid pour permettre l'acc�s � l'api
+      "RedirectUris": [ "https://www.getpostman.com/oauth2/callback" ],
+      "ClientSecrets": [ { "Value": "K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols=" } ], // secret.sha256()
+      "AllowedScopes": [
+        "openid",
+        "profile",
+        "RAMQ.FMA.Coord.Prototype",
+        "RAMQ"
+      ],
+      "AllowOfflineAccess": "true"
+    },
+    {
+      "ClientId": "Swagger",
+      "ClientName": "Swagger UI",
+      "AllowedGrantTypes": [ "implicit" ],
+      "RedirectUris": [ "http://10.211.55.65/swagger/o2c.html" ],
+      "ClientSecrets": [ { "Value": "K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols=" } ], // secret.sha256()
+      "AllowedScopes": [
+        "RAMQ.FMA.Coord.Prototype"
+      ],
+      "AllowAccessTokensViaBrowser": "true"
+    }			
+  ],
+
+  // Utilisateurs
+  "Users": [
+    {
+      "SubjectId": "1",
+      "Username": "admin",
+      "Password": "password",
+      "Claims": [
+        {
+          "Type": "name",
+          "Value": "Administrateur"
+        },
+        {
+          "Type": "groups",
+          "Value": "FMA_Admin"
+        },
+        {
+          "Type": "groups",
+          "Value": "FMA_Util"
+        }
+      ]
+    },
+    {
+      "SubjectId": "2",
+      "Username": "util",
+      "Password": "password",
+      "Claims": [
+        {
+          "Type": "name",
+          "Value": "Utilisateur"
+        },
+        {
+          "Type": "groups",
+          "Value": "FMA_Util"
+        }
+      ]
+    }
+  ]
+}

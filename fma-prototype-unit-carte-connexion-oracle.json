@@ -1,0 +1,7 @@
+{
+  "User Id": "system",
+  "Password": "oracle",
+  "Server": "fma-prototype-unit-bd",
+  "Port": "1521",
+  "License Key": "trial:/app/secrets/..data/Devart.Data.Oracle.key"
+}

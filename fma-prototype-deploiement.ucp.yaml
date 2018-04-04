@@ -1,0 +1,484 @@
+################################
+# Namespace fma-prototype
+################################
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fma-prototype
+---
+###########################################################################
+# Secrets
+##########################################################################
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fma-prototype-unit-devart-data-oracle
+  namespace: fma-prototype
+type: Opaque
+data:
+  Devart.Data.Oracle.key: cmytS4NtrUv4GAOHYz2TROK66S3f/JX+f6jpKvLSKOb34bnM4XLIV4jYLkVYpeXjxVsQzqs0mJBUDrneOL2au+iwYFRwirqyPa+Ztz2n3A2ZqMuHkjz1a7/5eR7otAFPFfWcrE5HDYrs+vbRNYMbGkSWjkj3wJsSCCKSOTWqfrlG5YSeaAf6VGzrTpujPVAsY4FW3mFCe/2k1JWRvLA53wNGhVfE9WK85/SL0pjRj6zcd/vigN95yPz4AbWabMGq2TkbQEE/y9xcg65mkx2RGHTfPUmRhgNpkG6pY+vt6Bkn2vwaijpimOMhu4+CMAK1UCw32ch7/If4iRqqxNfcTmya8zHjQYT4
+---                         
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fma-prototype-unit-carte-connexion-oracle-json
+  namespace: fma-prototype
+type: Opaque
+data:
+  fma-prototype-unit-carte-connexion-oracle.json: ew0KICAiVXNlciBJZCI6ICJzeXN0ZW0iLA0KICAiUGFzc3dvcmQiOiAib3JhY2xlIiwNCiAgIlNlcnZlciI6ICJmbWEtcHJvdG90eXBlLXVuaXQtYmQiLA0KICAiUG9ydCI6ICIxNTIxIiwNCiAgIkxpY2Vuc2UgS2V5IjogInRyaWFsOnswfS9EZXZhcnQuRGF0YS5PcmFjbGUua2V5Ig0KfQ==
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: fma-prototype-unit-config-servridt-json
+  namespace: fma-prototype
+type: Opaque
+data:
+  fma-prototype-unit.config.servridt.json: ew0KICAvLyBJZGVudGl077+9DQogICJJZGVudGl0eVJlc291cmNlcyI6IFsNCiAgICB7DQogICAgICAiRGlzcGxheU5hbWUiOiAiUkFNUSIsDQogICAgICAiTmFtZSI6ICJSQU1RIiwNCiAgICAgICJVc2VyQ2xhaW1zIjogWyAiZ3JvdXBzIiBdDQogICAgfQ0KICBdLA0KDQogIC8vIEFwaQ0KICAiQXBpUmVzb3VyY2VzIjogWw0KICAgIHsNCiAgICAgICJOYW1lIjogIlJBTVEuRk1BLkNvb3JkLlByb3RvdHlwZSIsDQogICAgICAiRGlzcGxheU5hbWUiOiAiUkFNUS5GTUEuQ29vcmQuUHJvdG90eXBlIiwNCiAgICAgICJDbGFpbVR5cGVzIjogWyAiZ3JvdXBzIiBdDQogICAgfQ0KICBdLA0KDQogIC8vIEFwcGxpY2F0aW9uIGNsaWVudGVzDQogICJDbGllbnRzIjogWw0KICAgIC8vIENsaWVudCBNVkMgZGUgbGEgc29sdXRpb24gUkFNUS5GTUEuUHJvdG90eXBlDQogICAgew0KICAgICAgIkNsaWVudElkIjogIlJBTVEuRk1BLklVLldFQi5Qcm90b3R5cGUiLA0KICAgICAgIkNsaWVudE5hbWUiOiAiUkFNUS5GTUEuSVUuV0VCLlByb3RvdHlwZSIsDQogICAgICAiQWx3YXlzSW5jbHVkZVVzZXJDbGFpbXNJbklkVG9rZW4iOiB0cnVlLCAvLyBQZXJtZXQgZCdhdm9pciBsZXMgY2xhaW1zIGRhbnMgbCdJZFRva2VuIHF1aSBlc3QgdXRpbGlz77+9IGRhbnMgbCdhcHBsaWNhdGlvbiBNVkMuDQogICAgICAiQWxsb3dlZEdyYW50VHlwZXMiOiBbICJoeWJyaWQiLCAiY2xpZW50X2NyZWRlbnRpYWxzIiBdLCAvLyBE77+9ZmluaXQgbCd1dGlsaXNhdGlvbiBkdSBmbG93IGh5YnJpZCBwb3VyIHBlcm1ldHRyZSBsJ2FjY++/vXMg77+9IGwnYXBpDQogICAgICAiUmVkaXJlY3RVcmlzIjogWyAiaHR0cDovL2V4dGlha3MuY2FuYWRhZWFzdC5jbG91ZGFwcC5henVyZS5jb20vZm1hcHJvdG90eXBlL3NpZ25pbi1vaWRjIiBdLA0KICAgICAgIlBvc3RMb2dvdXRSZWRpcmVjdFVyaXMiOiBbICJodHRwOi8vZXh0aWFrcy5jYW5hZGFlYXN0LmNsb3VkYXBwLmF6dXJlLmNvbS9mbWFwcm90b3R5cGUvc2lnbm91dC1jYWxsYmFjay1vaWRjIiBdLA0KICAgICAgIkNsaWVudFNlY3JldHMiOiBbIHsgIlZhbHVlIjogIks3Z05VM3NkbytPTDB3Tmhxb1ZXaHIzZzZzMXhZdjcyb2wvcGUvVW5vbHM9IiB9IF0sIC8vIHNlY3JldC5zaGEyNTYoKQ0KICAgICAgIkFsbG93ZWRTY29wZXMiOiBbDQogICAgICAgICJvcGVuaWQiLA0KICAgICAgICAicHJvZmlsZSIsDQogICAgICAgICJSQU1RLkZNQS5Db29yZC5Qcm90b3R5cGUiLA0KICAgICAgICAiUkFNUSINCiAgICAgIF0sDQogICAgICAiQWxsb3dPZmZsaW5lQWNjZXNzIjogInRydWUiLA0KICAgICAgIlJlcXVpcmVDb25zZW50IjogZmFsc2UNCiAgICB9LA0KICAgIHsNCiAgICAgICJDbGllbnRJZCI6ICJQb3N0bWFuIiwNCiAgICAgICJDbGllbnROYW1lIjogIlBvc3RtYW4iLA0KICAgICAgIkFsd2F5c0luY2x1ZGVVc2VyQ2xhaW1zSW5JZFRva2VuIjogdHJ1ZSwgLy8gUGVybWV0IGQnYXZvaXIgbGVzIGNsYWltcyBkYW5zIGwnSWRUb2tlbiBxdWkgZXN0IHV0aWxpc++/vSBkYW5zIGwnYXBwbGljYXRpb24gTVZDLg0KICAgICAgIkFsbG93ZWRHcmFudFR5cGVzIjogWyAiYXV0aG9yaXphdGlvbl9jb2RlIiBdLCAvLyBE77+9ZmluaXQgbCd1dGlsaXNhdGlvbiBkdSBmbG93IGh5YnJpZCBwb3VyIHBlcm1ldHRyZSBsJ2FjY++/vXMg77+9IGwnYXBpDQogICAgICAiUmVkaXJlY3RVcmlzIjogWyAiaHR0cHM6Ly93d3cuZ2V0cG9zdG1hbi5jb20vb2F1dGgyL2NhbGxiYWNrIiBdLA0KICAgICAgIkNsaWVudFNlY3JldHMiOiBbIHsgIlZhbHVlIjogIks3Z05VM3NkbytPTDB3Tmhxb1ZXaHIzZzZzMXhZdjcyb2wvcGUvVW5vbHM9IiB9IF0sIC8vIHNlY3JldC5zaGEyNTYoKQ0KICAgICAgIkFsbG93ZWRTY29wZXMiOiBbDQogICAgICAgICJvcGVuaWQiLA0KICAgICAgICAicHJvZmlsZSIsDQogICAgICAgICJSQU1RLkZNQS5Db29yZC5Qcm90b3R5cGUiLA0KICAgICAgICAiUkFNUSINCiAgICAgIF0sDQogICAgICAiQWxsb3dPZmZsaW5lQWNjZXNzIjogInRydWUiDQogICAgfSwNCiAgICB7DQogICAgICAiQ2xpZW50SWQiOiAiU3dhZ2dlciIsDQogICAgICAiQ2xpZW50TmFtZSI6ICJTd2FnZ2VyIFVJIiwNCiAgICAgICJBbGxvd2VkR3JhbnRUeXBlcyI6IFsgImltcGxpY2l0IiBdLA0KICAgICAgIlJlZGlyZWN0VXJpcyI6IFsgImh0dHA6Ly9leHRpYWtzLmNhbmFkYWVhc3QuY2xvdWRhcHAuYXp1cmUuY29tL3N3YWdnZXIvbzJjLmh0bWwiIF0sDQogICAgICAiQ2xpZW50U2VjcmV0cyI6IFsgeyAiVmFsdWUiOiAiSzdnTlUzc2RvK09MMHdOaHFvVldocjNnNnMxeFl2NzJvbC9wZS9Vbm9scz0iIH0gXSwgLy8gc2VjcmV0LnNoYTI1NigpDQogICAgICAiQWxsb3dlZFNjb3BlcyI6IFsNCiAgICAgICAgIlJBTVEuRk1BLkNvb3JkLlByb3RvdHlwZSINCiAgICAgIF0sDQogICAgICAiQWxsb3dBY2Nlc3NUb2tlbnNWaWFCcm93c2VyIjogInRydWUiDQogICAgfQkJCQ0KICBdLA0KDQogIC8vIFV0aWxpc2F0ZXVycw0KICAiVXNlcnMiOiBbDQogICAgew0KICAgICAgIlN1YmplY3RJZCI6ICIxIiwNCiAgICAgICJVc2VybmFtZSI6ICJhZG1pbiIsDQogICAgICAiUGFzc3dvcmQiOiAicGFzc3dvcmQiLA0KICAgICAgIkNsYWltcyI6IFsNCiAgICAgICAgew0KICAgICAgICAgICJUeXBlIjogIm5hbWUiLA0KICAgICAgICAgICJWYWx1ZSI6ICJBZG1pbmlzdHJhdGV1ciINCiAgICAgICAgfSwNCiAgICAgICAgew0KICAgICAgICAgICJUeXBlIjogImdyb3VwcyIsDQogICAgICAgICAgIlZhbHVlIjogIkZNQV9BZG1pbiINCiAgICAgICAgfSwNCiAgICAgICAgew0KICAgICAgICAgICJUeXBlIjogImdyb3VwcyIsDQogICAgICAgICAgIlZhbHVlIjogIkZNQV9VdGlsIg0KICAgICAgICB9DQogICAgICBdDQogICAgfSwNCiAgICB7DQogICAgICAiU3ViamVjdElkIjogIjIiLA0KICAgICAgIlVzZXJuYW1lIjogInV0aWwiLA0KICAgICAgIlBhc3N3b3JkIjogInBhc3N3b3JkIiwNCiAgICAgICJDbGFpbXMiOiBbDQogICAgICAgIHsNCiAgICAgICAgICAiVHlwZSI6ICJuYW1lIiwNCiAgICAgICAgICAiVmFsdWUiOiAiVXRpbGlzYXRldXIiDQogICAgICAgIH0sDQogICAgICAgIHsNCiAgICAgICAgICAiVHlwZSI6ICJncm91cHMiLA0KICAgICAgICAgICJWYWx1ZSI6ICJGTUFfVXRpbCINCiAgICAgICAgfQ0KICAgICAgXQ0KICAgIH0NCiAgXQ0KfQ0K
+---
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJyYW1xbGljLmF6dXJlY3IuaW8iOnsidXNlcm5hbWUiOiJyYW1xbGljIiwicGFzc3dvcmQiOiJEKy8rLzErLz11MkRlK3M9K1N2aS96YTY1bmQrQlFpSCIsImVtYWlsIjoibm90QHVzZWQuY29tIiwiYXV0aCI6ImNtRnRjV3hwWXpwRUt5OHJMekVyTHoxMU1rUmxLM005SzFOMmFTOTZZVFkxYm1RclFsRnBTQT09In19fQ==
+kind: Secret
+metadata:
+  name: registre-dev
+  namespace: fma-prototype
+type: kubernetes.io/dockerconfigjson
+---
+###########################################################################
+# ConfigMap
+##########################################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fma-prototype-unit-config
+  namespace: fma-prototype
+  labels:
+    app: fma-prototype-unit
+data:
+  OIDC_FOURNISSEUR: IS4
+  OIDC_CLIENT_ID: RAMQ.FMA.IU.WEB.Prototype
+  OIDC_AUTORITE: http://10.211.55.65/fmaprototype_securite
+  OIDC_AUDIENCE: RAMQ.FMA.Coord.Prototype
+  OIDC_REQUIERT_HTTPS: "false"
+  OIDC_CLIENT_SECRET: secret
+  OIDC_SCOPES: RAMQ.FMA.Coord.Prototype;offline_access;RAMQ
+  GROUPE_ADMIN: Demo_Admin
+  GROUPE_UTILISATEUR: Demo_Util
+---
+###########################################################################
+# Service fma-prototype-unit-bd
+##########################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fma-prototype-unit-bd
+    component: fma-prototype-unit-bd
+  name: fma-prototype-unit-bd
+  namespace: fma-prototype
+spec:
+  type: ClusterIP
+  selector:
+    app: fma-prototype-unit-bd
+    component: fma-prototype-unit-bd
+  ports:
+  - name: autre
+    protocol: TCP
+    port: 22
+  - name: oracle
+    protocol: TCP
+    port: 1521
+  - name: apex
+    protocol: TCP
+    port: 8080
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: fma-prototype-unit-bd
+  namespace: fma-prototype
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fma-prototype-unit-bd
+      component: fma-prototype-unit-bd
+  template:
+    metadata:
+      labels:
+        app: fma-prototype-unit-bd
+        component: fma-prototype-unit-bd
+    spec:
+      containers:
+      - name: fma-prototype-unit-bd
+        image: ramqlic.azurecr.io/ramq.fma.prototype.bd.oracle.xe.11g:859
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 1521
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: registre-dev
+---
+###########################################################################
+# Service fma-prototype-unit-redis
+##########################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fma-prototype-unit-redis
+    component: fma-prototype-unit-redis
+  name: fma-prototype-unit-redis
+  namespace: fma-prototype
+spec:
+  type: ClusterIP
+  selector:
+    app: fma-prototype-unit-redis
+    component: fma-prototype-unit-redis
+  ports:
+  - name: redis
+    protocol: TCP
+    port: 6379
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: fma-prototype-unit-redis
+  namespace: fma-prototype
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fma-prototype-unit-redis
+      component: fma-prototype-unit-redis
+  template:
+    metadata:
+      labels:
+        app: fma-prototype-unit-redis
+        component: fma-prototype-unit-redis
+    spec:
+      containers:
+      - name: fma-prototype-unit-redis
+        image: redis:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 6379
+---
+###########################################################################
+# Service fma-prototype-unit-securite
+##########################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fma-prototype-unit-securite
+    component: fma-prototype-unit-securite
+  name: fma-prototype-unit-securite
+  namespace: fma-prototype
+spec:
+  type: NodePort
+  selector:
+    app: fma-prototype-unit-securite
+    component: fma-prototype-unit-securite
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    nodePort: 30794
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: fma-prototype-unit-securite
+  namespace: fma-prototype
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fma-prototype-unit-securite
+      component: fma-prototype-unit-securite
+  template:
+    metadata:
+      labels:
+        app: fma-prototype-unit-securite
+        component: fma-prototype-unit-securite
+    spec:
+      #hostNetwork: true
+      containers:
+      - name: fma-prototype-unit-securite
+        image: ramqlic.azurecr.io/ramq.com.serveuridentite:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: RPERT_SECRET
+          value: /app/secrets
+        - name: CONFIG_SERVR_IDT
+          value: fma_prototype_unit.Config.ServrIdt.json
+        - name: PATH_BASE
+          value: /fmaprototype_securite
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: secrets
+          mountPath: /app/secrets
+          readOnly: true
+      volumes:
+      - name: secrets
+        secret:
+          secretName: fma-prototype-unit-config-servridt-json
+      imagePullSecrets:
+      - name: registre-dev
+---
+###########################################################################
+# Service fma-prototype-unit-web
+##########################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fma-prototype-unit-web
+    component: fma-prototype-unit-web
+  name: fma-prototype-unit-web
+  namespace: fma-prototype
+spec:
+  type: NodePort
+  selector:
+    app: fma-prototype-unit-web
+    component: fma-prototype-unit-web
+  ports:
+  - name: http
+    protocol: TCP
+    #nodePort: 30790
+    port: 80
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: fma-prototype-unit-web
+  namespace: fma-prototype
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fma-prototype-unit-web
+      component: fma-prototype-unit-web
+  template:
+    metadata:
+      labels:
+        app: fma-prototype-unit-web
+        component: fma-prototype-unit-web
+    spec:
+      containers:
+      - name: fma-prototype-unit-web
+        image: ramqlic.azurecr.io/ramq.fma.iu.web.prototype:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: unitaire        
+        - name: PATH_BASE
+          value: /unit/prototype
+        - name: SERVEURLA
+          value: http://fma-prototype-unit-api
+        - name: REDIS_URL
+          value: fma-prototype-unit-redis:6379
+        - name: PATH_BASE
+          value: /fmaprototype
+        - name: OIDC_FOURNISSEUR
+          valueFrom:
+           configMapKeyRef:
+             name: fma-prototype-unit-config
+             key: OIDC_FOURNISSEUR        
+        - name: OIDC_CLIENT_ID
+          valueFrom:
+           configMapKeyRef:
+             name: fma-prototype-unit-config
+             key: OIDC_CLIENT_ID        
+        - name: OIDC_AUTORITE
+          valueFrom:
+           configMapKeyRef:
+             name: fma-prototype-unit-config
+             key: OIDC_AUTORITE        
+        - name: OIDC_CLIENT_SECRET
+          valueFrom:
+           configMapKeyRef:
+             name: fma-prototype-unit-config
+             key: OIDC_CLIENT_SECRET        
+        - name: OIDC_SCOPES
+          valueFrom:
+           configMapKeyRef:
+             name: fma-prototype-unit-config
+             key: OIDC_SCOPES        
+        - name: GROUPE_ADMIN
+          valueFrom:
+           configMapKeyRef:
+             name: fma-prototype-unit-config
+             key: GROUPE_ADMIN        
+        - name: GROUPE_UTILISATEUR
+          valueFrom:
+           configMapKeyRef:
+             name: fma-prototype-unit-config
+             key: GROUPE_UTILISATEUR        
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: log
+          mountPath: /app/log
+      volumes:
+      - name: log
+        hostPath:
+          path: /var/prototype
+          type: DirectoryOrCreate
+      imagePullSecrets:
+      - name: registre-dev
+---
+###########################################################################
+# Service fma-prototype-unit-api
+##########################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: fma-prototype-unit-api
+    component: fma-prototype-unit-api
+  name: fma-prototype-unit-api
+  namespace: fma-prototype
+spec:
+  type: ClusterIP
+  selector:
+    app: fma-prototype-unit-api
+    component: fma-prototype-unit-api
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: fma-prototype-unit-api
+  namespace: fma-prototype
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fma-prototype-unit-api
+      component: fma-prototype-unit-api
+  template:
+    metadata:
+      labels:
+        app: fma-prototype-unit-api
+        component: fma-prototype-unit-api
+    spec:
+      containers:
+      - name: fma-prototype-unit-api
+        image: ramqlic.azurecr.io/ramq.fma.coord.prototype:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: unitaire
+        - name: RPERT_SECRET
+          value: /app/secrets/..data
+        - name: INFO_CONNEXION
+          value: fma-prototype-unit-carte-connexion-oracle.json
+        - name: CHAINE_CONNEXION
+          value: Direct=True;Service Name=XE;Connection Timeout=30;
+        - name: HEALTH_CHECK_BD
+          value: http://fma-prototype-unit-bd:8080/apex
+        - name: OIDC_AUDIENCE
+          valueFrom:
+           configMapKeyRef:
+             name: fma-prototype-unit-config
+             key: OIDC_AUDIENCE
+        - name: OIDC_AUTORITE
+          valueFrom:
+           configMapKeyRef:
+             name: fma-prototype-unit-config
+             key: OIDC_AUTORITE        
+        - name: OIDC_REQUIERT_HTTPS
+          valueFrom:
+           configMapKeyRef:
+             name: fma-prototype-unit-config
+             key: OIDC_REQUIERT_HTTPS        
+        - name: GROUPE_ADMIN
+          valueFrom:
+           configMapKeyRef:
+             name: fma-prototype-unit-config
+             key: GROUPE_ADMIN        
+        - name: GROUPE_UTILISATEUR
+          valueFrom:
+           configMapKeyRef:
+             name: fma-prototype-unit-config
+             key: GROUPE_UTILISATEUR        
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: secrets
+          mountPath: /app/secrets
+          readOnly: true
+        - name: log
+          mountPath: /app/log
+      volumes:
+      - name: secrets
+        projected:
+          sources:
+          - secret:
+              name: fma-prototype-unit-devart-data-oracle
+          - secret:
+              name: fma-prototype-unit-carte-connexion-oracle-json
+      - name: log
+        hostPath:
+          path: /var/prototype
+          type: DirectoryOrCreate
+      imagePullSecrets:
+      - name: registre-dev
+---
+###########################################################################
+# Ingress
+##########################################################################
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: fma-prototype-ingress
+  namespace: fma-prototype
+  annotations:
+    kubernetes.io/ingress.class: "istio"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /fmaprototype
+        backend:
+          serviceName: fma-prototype-unit-web
+          servicePort: 80
+      - path: /fmaprototype/.*
+        backend:
+          serviceName: fma-prototype-unit-web
+          servicePort: 80
+      - path: /fmaprototype_securite
+        backend:
+          serviceName: fma-prototype-unit-securite
+          servicePort: 80
+      - path: /fmaprototype_securite/.*
+        backend:
+          serviceName: fma-prototype-unit-securite
+          servicePort: 80
+      - path: /swagger
+        backend:
+          serviceName: fma-prototype-unit-api
+          servicePort: 80
+      - path: /swagger/.*
+        backend:
+          serviceName: fma-prototype-unit-api
+          servicePort: 80
+---
+apiVersion: config.istio.io/v1alpha2
+kind: EgressRule
+metadata:
+  name: extiaks-egress-rule
+spec:
+  destination:
+    service: 10.211.55.65
+  ports:
+    - port: 80
+      protocol: http
+---
