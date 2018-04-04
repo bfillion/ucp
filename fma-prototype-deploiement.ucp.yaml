@@ -477,6 +477,6 @@ spec:
   destination:
     service: 10.211.55.65
   ports:
-    - port: 80
+    - port: 32285
       protocol: http
 ---
