@@ -25,8 +25,8 @@
       "ClientName": "RAMQ.FMA.IU.WEB.Prototype",
       "AlwaysIncludeUserClaimsInIdToken": true, // Permet d'avoir les claims dans l'IdToken qui est utilis� dans l'application MVC.
       "AllowedGrantTypes": [ "hybrid", "client_credentials" ], // D�finit l'utilisation du flow hybrid pour permettre l'acc�s � l'api
-      "RedirectUris": [ "http://10.211.55.65/fmaprototype/signin-oidc" ],
-      "PostLogoutRedirectUris": [ "http://10.211.55.65/fmaprototype/signout-callback-oidc" ],
+      "RedirectUris": [ "http://10.211.55.65:32285/fmaprototype/signin-oidc" ],
+      "PostLogoutRedirectUris": [ "http://10.211.55.65:32285/fmaprototype/signout-callback-oidc" ],
       "ClientSecrets": [ { "Value": "K7gNU3sdo+OL0wNhqoVWhr3g6s1xYv72ol/pe/Unols=" } ], // secret.sha256()
       "AllowedScopes": [
         "openid",
